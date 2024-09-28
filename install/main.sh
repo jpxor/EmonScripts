@@ -29,7 +29,8 @@ if [ -f /etc/needrestart/needrestart.conf ]; then
 fi
 
 if [ ! -f config.ini ]; then
-    cp emonsd.config.ini config.ini
+    echo -e "pre-configured confir.ini not found\n"
+    exit 1
 fi
 source load_config.sh
     
@@ -37,22 +38,25 @@ echo "-------------------------------------------------------------"
 echo "EmonSD Install"
 echo "-------------------------------------------------------------"
 
-echo "Warning: The default configuration of this script applies"
-echo "significant modification to the underlying system!"
-echo ""
-read -p "Would you like to review the build script config before starting? (y/n) " start_confirm
+###############################################
+### Config has been modified for Ubuntu install
+###############################################
+# echo "Warning: The default configuration of this script applies"
+# echo "significant modification to the underlying system!"
+# echo ""
+# read -p "Would you like to review the build script config before starting? (y/n) " start_confirm
 
-if [ "$start_confirm" != "n" ] && [ "$start_confirm" != "N" ]; then
-    echo ""
-    echo "You selected 'yes' to review config"
-    echo "Please review config.ini and restart the build script to continue"
-    echo ""
-    echo "    cd $openenergymonitor_dir/EmonScripts/install/"
-    echo "    nano config.ini"
-    echo "    ./main.sh"
-    echo ""
-    exit 0
-fi
+# if [ "$start_confirm" != "n" ] && [ "$start_confirm" != "N" ]; then
+#     echo ""
+#     echo "You selected 'yes' to review config"
+#     echo "Please review config.ini and restart the build script to continue"
+#     echo ""
+#     echo "    cd $openenergymonitor_dir/EmonScripts/install/"
+#     echo "    nano config.ini"
+#     echo "    ./main.sh"
+#     echo ""
+#     exit 0
+# fi
 
 if [ "$apt_get_upgrade_and_clean" = true ]; then
     echo "apt-get update"
